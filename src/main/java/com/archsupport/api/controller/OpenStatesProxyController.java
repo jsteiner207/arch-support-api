@@ -34,10 +34,9 @@ public class OpenStatesProxyController {
         this.restTemplate = builder.build();
     }
 
-    // TODO: Enable redis caching
     @Cacheable(value = "billsCache", key = "#queryParams.toString()")
     @GetMapping("bills")
-    public ResponseEntity<String> getLegislators(@RequestParam Map<String, String> queryParams) {
+    public String getLegislators(@RequestParam Map<String, String> queryParams) {
         String url = "https://v3.openstates.org/bills?" + buildQueryString(queryParams);
 
         HttpHeaders headers = new HttpHeaders();
@@ -52,9 +51,7 @@ public class OpenStatesProxyController {
                 String.class
         );
 
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body(response.getBody());
+        return response.getBody();
     }
 
         private String buildQueryString(Map<String, String> queryParams) {
