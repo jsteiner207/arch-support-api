@@ -1,7 +1,6 @@
 package com.archsupport.api.config;
 
 import java.time.Duration;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -19,7 +18,6 @@ public class RedisConfig {
             .entryTtl(Duration.ofDays(2))
             .disableCachingNullValues()
             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()));
-            
-        return RedisCacheManager.builder(connectionFactory).cacheDefaults(config).build();
-        } 
+            return RedisCacheManager.builder(connectionFactory).cacheDefaults(config).build();
+    } 
 }
