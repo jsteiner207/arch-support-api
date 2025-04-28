@@ -16,4 +16,9 @@ public class BillService {
     public String getBills(Map<String, String> queryParams) {
         return openStatesApiClient.fetchBills(queryParams);
     }
+
+    @Cacheable(value = "billDetailsCache", key = "#billId")
+    public String getBillDetails(String billId, Map<String, String> queryParams) {
+        return openStatesApiClient.fetchBillDetails(billId, queryParams);
+    }
 }
